@@ -49,7 +49,7 @@ export default {
     class="d-flex align-center justify-center flex-column bg-brown-lighten-5 h-100 overflow-hidden"
   >
     <v-card
-      class="card mx-auto bg-grey-lighten-5 text-brown-darken-1"
+      class="card bg-grey-lighten-5 text-brown-darken-1"
       rounded="xl"
       elevation="16"
       width="550"
@@ -151,3 +151,19 @@ export default {
     </v-card>
   </div>
 </template>
+
+<style scoped>
+.card {
+  margin: auto;
+}
+
+@media (max-width: 500px) {
+  .card {
+    max-width: 350px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+</style>

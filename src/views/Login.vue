@@ -36,7 +36,7 @@ export default {
     rounded
   >
     <v-card
-      class="card mx-auto px-6 py-8 grey-lighten-5"
+      class="d-md-xxl-mx-auto px-6 py-8 bg-grey-lighten-5 mx-4"
       height="450"
       width="550"
       rounded="xl"
@@ -73,7 +73,7 @@ export default {
         <br />
         <v-divider></v-divider>
 
-        <div class="px-16 py-6">
+        <div class="px-16 py-4">
           <v-btn
             :disabled="!form"
             :loading="loading"
@@ -94,7 +94,7 @@ export default {
 
         <br />
         <div
-          class="text-body-1 d-flex d-flex-column align-center justify-space-around px-16 mx-4 mb-4 pb-4"
+          class="footer text-body-1 d-flex d-flex-row align-center justify-space-around mx-4 mb-4 pb-4"
         >
           <p class="text-brown-darken-1">Don't have an account?</p>
           <router-link
@@ -108,3 +108,16 @@ export default {
     </v-card>
   </v-sheet>
 </template>
+
+<style scoped>
+.footer {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+@media (max-width: 500px) {
+.footer {
+  padding-left: 0;
+  padding-right: 0;
+}
+}
+</style>
