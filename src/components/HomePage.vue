@@ -33,7 +33,7 @@
 <style scoped>
 h1 {
   font-family: "Architects Daughter", cursive;
-  font-size: 120px;
+  font-size: 140px;
   font-weight: lighter;
 }
 
