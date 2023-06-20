@@ -10,7 +10,7 @@
         <v-col cols="auto">
           <router-link
             to="/new-account"
-            class="text-pink-lighten-3 font-weight-regular text-decoration-none text-h5"
+            class="link text-pink-lighten-3 font-weight-regular text-decoration-none"
           >
             Sign Up
           </router-link>
@@ -19,7 +19,7 @@
         <v-col cols="auto">
           <router-link
             to="/login"
-            class="text-pink-lighten-3 font-weight-regular text-decoration-none text-h5"
+            class="link text-pink-lighten-3 font-weight-regular text-decoration-none"
             >Login</router-link
           >
         </v-col>
@@ -35,5 +35,18 @@ h1 {
   font-family: "Architects Daughter", cursive;
   font-size: 120px;
   font-weight: lighter;
+}
+
+.link {
+  font-size: 1.7rem;
+}
+
+@media (max-width: 500px) {
+  h1{
+    font-size: 70px;
+  }
+  .link{
+    font-size: 1rem
+  }
 }
 </style>
