@@ -1,5 +1,7 @@
 <script>
+import { authApiMixin } from "@/api/auth";
 export default {
+  mixins: [authApiMixin],
   data: () => ({
     name: "",
     username: "",
@@ -32,6 +34,9 @@ export default {
     confirmUserName(value) {
       if (value.toLowerCase() !== value) return "Only lower case";
       return true;
+      // (v) =>
+      //     /^[a-z]+$/.test(v) || "Username must contain only lowercase letters",
+      //   (v) => !/\s/.test(v) || "Username must not contain spaces",
     },
     passwordRules(value) {
       const senhaRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
@@ -39,6 +44,25 @@ export default {
         return "Password must be at least 8 characters long, contain at least 1 special character and 1 number";
       }
       return true;
+    },
+    async handleSubmit() {
+      const payload = {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+      };
+      try {
+        await this.register(payload);
+        alert("User successfully created!");
+        this.$router.push("/login");
+      } catch (err) {
+        const status = err.response.status;
+        if (status >= 500 && status < 600) {
+          alert("Server error!");
+        } else {
+          alert("Algo deu errado!");
+        }
+      }
     },
   },
 };
@@ -130,6 +154,7 @@ export default {
           class="rounded-xl font-weight-bold text-white"
           elevation="4"
           height="50px"
+          @click="handleSubmit"
         >
           Sign Up
         </v-btn>

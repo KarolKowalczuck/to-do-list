@@ -1,5 +1,8 @@
 <script>
+import { setupPrivateApi } from "@/api";
+import { authApiMixin } from "@/api/auth";
 export default {
+  mixins: [authApiMixin],
   data: () => ({
     form: false,
     email: "",
@@ -25,6 +28,27 @@ export default {
       this.loading = true;
 
       setTimeout(() => (this.loading = false), 2000);
+    },
+    async handleSubmit() {
+      const payload = {
+        email: this.email,
+        password: this.password,
+      };
+
+      try {
+        const { data } = await this.login(payload);
+        const { access_token } = data;
+        setupPrivateApi(access_token);
+        localStorage.setItem("access_token", access_token);
+
+        alert("deu boa!");
+        console.log(payload);
+        console.log(data);
+        this.$router.push("/dashboard");
+
+      } catch (err) {
+        alert("Server error");
+      }
     },
   },
 };
@@ -85,6 +109,7 @@ export default {
             variant="elevated"
             elevation="4"
             height="50px"
+            @click="handleSubmit"
           >
             Log In
           </v-btn>
@@ -94,11 +119,11 @@ export default {
 
         <br />
         <div
-          class="footer text-body-1 d-flex d-flex-row align-center justify-space-around mx-4 mb-4 pb-4"
+          class="footer text-body-1 d-flex flex-column align-center justify-space-around mx-4 mb-4 pb-4"
         >
           <p class="text-brown-darken-1">Don't have an account?</p>
           <router-link
-            to="./new-account"
+            to="./register"
             class="text-pink-lighten-2 text-decoration-none"
           >
             Sign Up
@@ -115,9 +140,9 @@ export default {
   padding-right: 3rem;
 }
 @media (max-width: 500px) {
-.footer {
-  padding-left: 0;
-  padding-right: 0;
-}
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 </style>
