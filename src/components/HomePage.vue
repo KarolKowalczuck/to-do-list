@@ -1,3 +1,5 @@
+<script></script>
+
 <template>
   <div
     class="d-flex align-center justify-center h-100 overflow-hidden bg-grey-lighten-5"
@@ -9,7 +11,7 @@
       <v-row class="d-flex align-center justify-center">
         <v-col cols="auto">
           <router-link
-            to="/new-account"
+            to="/register"
             class="link text-pink-lighten-3 font-weight-regular text-decoration-none"
           >
             Sign Up
@@ -27,8 +29,6 @@
     </v-responsive>
   </div>
 </template>
-
-<script setup></script>
 
 <style scoped>
 h1 {

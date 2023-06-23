@@ -3,14 +3,18 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () => import("@/views/Dashboard.vue"),
+  },
+  {
     path: "/",
     component: () => import("@/layouts/default/Default.vue"),
     children: [
       {
         path: "",
         name: "Home",
-        component: () =>
-          import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
+        component: () => import("@/views/Home.vue"),
       },
       {
         path: "login",
@@ -18,10 +22,10 @@ const routes = [
         component: () => import("@/views/Login.vue"),
       },
       {
-      path: "new-account",
-      name: "Account",
-      component: () => import("@/views/Account.vue"),
-      }
+        path: "register",
+        name: "Register",
+        component: () => import("@/views/Register.vue"),
+      },
     ],
   },
 ];
