@@ -3,6 +3,11 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () => import("@/views/Dashboard.vue"),
+  },
+  {
     path: "/",
     component: () => import("@/layouts/default/Default.vue"),
     children: [
@@ -20,11 +25,6 @@ const routes = [
         path: "register",
         name: "Register",
         component: () => import("@/views/Register.vue"),
-      },
-      {
-        path: "dashboard",
-        name: "Dashboard",
-        component: () => import("@/views/Dashboard.vue"),
       },
     ],
   },
