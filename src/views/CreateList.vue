@@ -1,31 +1,32 @@
 <script>
 import { toDoListsApiMixin } from "@/api/toDoList";
+
 export default {
   mixins: [toDoListsApiMixin],
-  data(){
-    return{
-      toDoLists: [], //toDoLists vai ser um conjunto de arrays
+  data() {
+    return {
       title: "",
+      items: [],
     };
-  }, 
-  methods: {
-    async getTitle() {
-      const payload = {
-        title: this.title,
-      };
-      try {
-        await this.newList(payload);
-        alert("User successfully created!");
-        this.$router.push("/dashboard");
-      } catch (err) {
-        alert("Error");
-      }
   },
-},
-}
-
+  methods: {
+    async CreatList() {
+      try {
+        const title = {
+          title: this.title,
+        };
+        const { data } = await this.create(title);
+        // this.toDoList.push(data);
+       this.$router.push("/dashboard")
+      } catch (err) {
+        console.log(err);
+      } finally {
+        this.title = "";
+      }
+    },
+  },
+};
 </script>
-
 
 <template>
 <v-text-field
@@ -45,9 +46,8 @@ export default {
           class="rounded-xl font-weight-bold text-white"
           elevation="4"
           height="50px"
-          @click="getTitle"
+          @click="CreatList"
         >
           Sign Up
         </v-btn>
-
 </template>
