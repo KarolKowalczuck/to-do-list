@@ -11,7 +11,6 @@ export default {
       newItem: null,
       listTitle: "",
       listId: this.$route.params.id,
-      done: Boolean,
     };
   },
   methods: {
@@ -54,12 +53,12 @@ export default {
         console.log(err);
       }
     },
-    async updatedTask(itemId){
+    async updatedTask(item){
       try {
         let updatetask = {
-          done: true,
+          done: item.done
         }
-       const response = await this.updateItem(itemId, updatetask)
+      await this.updateItem(item.id, updatetask)
       } 
         catch (err) {
         console.log(err)
@@ -96,10 +95,9 @@ export default {
         <v-list-item>
           <template v-slot:prepend>
             <v-checkbox-btn
-                @change="updatedTask(item.id)"
+                @change="updatedTask(item)"
               v-model="item.done"
               color="success"
-              
             ></v-checkbox-btn>
           </template>
           <v-list-item-title>
