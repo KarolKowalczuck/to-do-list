@@ -8,6 +8,11 @@ const routes = [
     component: () => import("@/views/Dashboard.vue"),
   },
   {
+    path: "/create-list",
+    name: "CreateList",
+    component: () => import("@/views/CreateList.vue"),
+  },
+  {
     path: "/",
     component: () => import("@/layouts/default/Default.vue"),
     children: [

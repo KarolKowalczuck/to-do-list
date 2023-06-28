@@ -1,32 +1,44 @@
 <script>
 import { toDoListsApiMixin } from "@/api/toDoList";
+import ToDoList from "@/components/ToDo.vue";
 
 export default {
   mixins: [toDoListsApiMixin],
   data() {
     return {
       toDoLists: [],
+      listTitle: "",
+      listId: this.$route.params.id,
     };
+  },
+  components: {
+    ToDoList,
   },
   methods: {
     async getLists() {
       try {
         const { data } = await this.list();
         this.toDoLists = data;
-        console.log(data);
       } catch (err) {
-        alert("Error");
+        console.log(err)
       }
     },
+
   },
   mounted() {
     this.getLists();
   },
 };
 </script>
-
 <template>
   <v-card v-for="list in toDoLists" :key="list.id">
-    <v-card-title>{{ list.title }}</v-card-title>
+    <router-link :to="`/list-detail/${list.id}`">
+      <v-card-title> {{ list.title }}</v-card-title>
+    </router-link>
   </v-card>
+<br/>
+  <v-btn>
+    <router-link to="/create-list">criar</router-link>
+  </v-btn>
+
 </template>
