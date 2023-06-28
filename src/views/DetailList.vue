@@ -11,6 +11,7 @@ export default {
       newItem: null,
       listTitle: "",
       listId: this.$route.params.id,
+      dialog: false,
     };
   },
   methods: {
@@ -41,7 +42,7 @@ export default {
         catch (err) {
         console.log(err)
       }
-    }
+    },
   },
   mounted() {
     this.showList();
@@ -83,9 +84,37 @@ export default {
     <v-btn>
       <router-link :to="`/edit-list/${listId}`">Editar Lista </router-link>
     </v-btn>
-      <v-btn @click="deleteList"> Deletar Lista </v-btn>
+      <v-btn @click="setupModal(deleteList)"> Deletar Lista 
+      <v-dialog v-model="dialog" activator="parent" width="auto">
+        <v-card>
+          <v-card-text>
+            <h3>Deletar Lista</h3>
+      <p>Tem certeza que quer deletar a Lista '{{ listTitle}}'?</p>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn  @click="dialog = false">Cancelar</v-btn>
+            <v-btn  @click="deleteList">Deletar</v-btn>
+          </v-card-actions>
+        </v-card>
+       </v-dialog>
+       </v-btn>
     <v-btn>
       <router-link to="/dashboard">Home </router-link>
     </v-btn>
   </v-container>
+
+  <Modal v-show="showModal"> 
+    <div class="modal-content">
+      <h3>Deletar Lista</h3>
+      <p>Tem certeza que quer deletar a Lista '{{ listTitle}}'?</p>
+
+      <div class="modal-actions">
+        <button class="btn-cancelar" @click="setupModal">cancelar</button>
+        <button class="btn-confirmar" @click="deleteList">confirmar</button>
+      </div>
+    </div>
+  
+  </Modal>
+    
+
 </template>
