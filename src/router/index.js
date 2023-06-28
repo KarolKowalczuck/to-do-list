@@ -8,6 +8,11 @@ const routes = [
     component: () => import("@/views/Dashboard.vue"),
   },
   {
+    path: "/edit-list/:id",
+    name: "EditList",
+    component: () => import("@/views/EditList.vue"),
+  },
+  {
     path: "/create-list",
     name: "CreateList",
     component: () => import("@/views/CreateList.vue"),
