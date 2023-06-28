@@ -13,6 +13,11 @@ const routes = [
     component: () => import("@/views/CreateList.vue"),
   },
   {
+    path: "/list-detail/:id",
+    name: "ListDetail",
+    component: () => import("@/views/DetailList.vue"),
+  },
+  {
     path: "/",
     component: () => import("@/layouts/default/Default.vue"),
     children: [

@@ -10,5 +10,9 @@ export const authApiMixin = {
       const res = await publicApi.post("/auth/login", payload);
       return res;
     },
+    // async creat(payload) {
+    //   const res = await publicApi.post("/auth/creat", payload);
+    //   return res;
+    // },
   },
 };
