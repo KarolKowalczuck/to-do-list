@@ -35,6 +35,7 @@ export default {
             placeholder="Enter your ToDo title"
             variant="underlined"
             class="text-brown-darken-4"
+            @keydown.enter="CreatList"
           ></v-text-field>
 
           <v-btn
