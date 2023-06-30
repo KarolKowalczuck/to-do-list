@@ -1,6 +1,7 @@
 <script>
 import { toDoListsApiMixin } from "@/api/toDoList";
 import { itemsApiMixin } from "@/api/itens";
+import Loading from "@/components/Loading.vue";
 
 export default {
   mixins: [toDoListsApiMixin, itemsApiMixin],
@@ -11,19 +12,27 @@ export default {
       listTitle: "",
       itemUp: "",
       listId: this.$route.params.id,
+      loading: false,
     };
+  },
+  components: {
+    Loading,
   },
   methods: {
     async showList() {
+      this.loading = true;
       try {
         const { data } = await this.view(this.listId);
         this.items = data.items;
         this.listTitle = data.title;
       } catch (err) {
         console.log(err);
+      } finally {
+        this.loading = false;
       }
     },
     async createTask() {
+      this.loading = true;
       try {
         const item = {
           title: this.title,
@@ -36,33 +45,43 @@ export default {
         console.log(err);
       } finally {
         this.title = "";
+        this.loading = false;
       }
     },
     async deleteList() {
+      this.loading = true;
       try {
         await this.remove(this.listId);
         this.$router.push("/dashboard");
       } catch (err) {
         console.log(err);
+      } finally {
+        this.loading = false;
       }
     },
     async deleteTask(itemId) {
+      this.loading = true;
       try {
         await this.removeItem(itemId);
         this.showList();
       } catch (err) {
         console.log(err);
+      } finally {
+        this.loading = false;
       }
     },
     async updatedTask(id, title) {
-      // qual tarefa?
+      this.loading = true;
       try {
         await this.updateItem(id, { title });
       } catch (err) {
         console.log(err);
+      } finally {
+        this.loading = false;
       }
     },
     async updateTitle() {
+      this.loading = true;
       console.log(this.listId);
       const payload = {
         title: this.listTitle,
@@ -71,6 +90,8 @@ export default {
         await this.updateList(this.listId, payload);
       } catch (err) {
         console.log(err);
+      } finally {
+        this.loading = false;
       }
     },
   },
@@ -81,6 +102,7 @@ export default {
 </script>
 
 <template>
+  <Loading v-if="loading"></Loading>
   <v-sheet
     class="d-flex flex-column justify-center align-center bg-brown-lighten-5"
     height="100vh"
@@ -122,7 +144,7 @@ export default {
           @click:append-inner="createTask"
         >
         </v-text-field>
-        <v-divider class="mb-4 mx-8"/>
+        <v-divider class="mb-4 mx-8" />
 
         <v-card
           class="overflow-auto mx-6 bg-transparent"
@@ -156,7 +178,7 @@ export default {
         <v-divider class="mt-6 mx-8" />
         <div class="d-flex justify-center my-2">
           <v-btn
-          color="grey-lighten-4"
+            color="grey-lighten-4"
             class="my-4"
             width="15vw"
             height="5vh"
