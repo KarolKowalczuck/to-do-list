@@ -163,13 +163,17 @@ export default {
                 <v-text-field
                   v-model="item.title"
                   variant="plain"
-                  prepend-icon="mdi-coffee-outline text-pink-lighten-3"
                   color="brown-darken-1"
                   append-inner-icon="mdi-check text-teal-darken-1"
                   append-icon="mdi-close text-red-darken-3"
                   @click:append-inner="updatedTask(item.id, item.title)"
                   @click:append="deleteTask(item.id)"
                 >
+                  <img
+                    src="../components/images/cafe.png"
+                    height="30"
+                    class="mr-3"
+                  />
                 </v-text-field>
               </v-list-item-title>
             </v-list-item>
