@@ -1,6 +1,7 @@
 <script>
 import { toDoListsApiMixin } from "@/api/toDoList";
 import { itemsApiMixin } from "@/api/itens";
+import Loading from "@/components/Loading.vue";
 
 export default {
   mixins: [toDoListsApiMixin, itemsApiMixin],
@@ -12,24 +13,34 @@ export default {
       listTitle: "",
       listId: this.$route.params.id,
       dialog: false,
+      loading: false,
     };
+  },
+  components: {
+    Loading,
   },
   methods: {
     async showList() {
+      this.loading = true;
       try {
         const { data } = await this.view(this.listId);
         this.items = data.items;
         this.listTitle = data.title;
       } catch (err) {
         console.log(err);
+      } finally {
+        this.loading = false;
       }
     },
     async deleteList() {
+      this.loading = true;
       try {
         await this.remove(this.listId);
         this.$router.push("/dashboard");
       } catch (err) {
         console.log(err);
+      } finally {
+        this.loading = false;
       }
     },
     async updatedTask(item) {
@@ -50,6 +61,7 @@ export default {
 </script>
 
 <template>
+   <Loading v-if="loading"></Loading>
   <v-sheet
     class="d-flex flex-column align-center justify-center overflow-auto bg-brown-lighten-5"
     rounded
@@ -67,7 +79,7 @@ export default {
           {{ listTitle }}
         </h1>
       </div>
-      <v-divider class="mt-6 mx-8"/>
+      <v-divider class="mt-6 mx-8" />
       <v-container>
         <v-card
           class="bg-transparent overflow-auto mx-4"
@@ -107,7 +119,7 @@ export default {
             </v-list-item>
           </template>
         </v-card>
-        <v-divider class="mt-4 mx-8"/>
+        <v-divider class="mt-4 mx-8" />
         <div class="d-flex justify-space-between align-center">
           <div class="my-10 d-flex justify-start">
             <v-btn
@@ -148,7 +160,9 @@ export default {
                       Delete List
                     </h3>
                     <p>
-                      Are you sure you want to delete the list '{{ listTitle }}'?
+                      Are you sure you want to delete the list '{{
+                        listTitle
+                      }}'?
                     </p>
                   </v-card-text>
                   <v-card-actions

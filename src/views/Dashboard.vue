@@ -1,6 +1,7 @@
 <script>
 import { toDoListsApiMixin } from "@/api/toDoList";
 import ToDoList from "@/components/ToDo.vue";
+import Loading from "@/components/Loading.vue";
 
 export default {
   mixins: [toDoListsApiMixin],
@@ -9,18 +10,23 @@ export default {
       toDoLists: [],
       listTitle: "",
       listId: this.$route.params.id,
+      loading: false,
     };
   },
   components: {
     ToDoList,
+    Loading,
   },
   methods: {
     async getLists() {
+      this.loading = true;
       try {
         const { data } = await this.list();
         this.toDoLists = data;
       } catch (err) {
         console.log(err);
+      } finally {
+        this.loading = false;
       }
     },
   },
@@ -30,6 +36,7 @@ export default {
 };
 </script>
 <template>
+   <Loading v-if="loading"></Loading>
   <v-sheet
     class="d-flex align-center justify-center overflow-hidden bg-brown-lighten-5"
     rounded
