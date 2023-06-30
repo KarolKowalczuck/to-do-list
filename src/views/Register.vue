@@ -9,8 +9,6 @@ export default {
     password: "",
     passwordtest: "",
     show1: false,
-    show2: false,
-    terms: false,
     loading: false,
     form: false,
     rules: {
@@ -60,7 +58,7 @@ export default {
         if (status >= 500 && status < 600) {
           alert("Server error!");
         } else {
-          alert("Algo deu errado!");
+          console.log(err);
         }
       }
     },
@@ -73,12 +71,12 @@ export default {
     class="d-flex align-center justify-center flex-column bg-brown-lighten-5 h-100 overflow-hidden"
   >
     <v-card
-      class="card bg-grey-lighten-5 text-brown-darken-1"
+      class="card bg-gret-lighten-5 text-brown-darken-1 px-6"
       rounded="xl"
       elevation="16"
       width="550"
     >
-      <p class="text-brown-darken-1 pl-5 pt-8 text-h5 font-weight-medium">
+      <p class="text-brown-darken-1 pl-3 pt-8 pb-2 text-h4 font-weight-medium">
         Create new account
       </p>
 
@@ -90,6 +88,7 @@ export default {
             label="Name"
             placeholder="Enter your full name"
             variant="underlined"
+            color="pink-lighten-3"
             class="text-brown-darken-4"
           ></v-text-field>
 
@@ -99,6 +98,7 @@ export default {
             label="Username"
             placeholder="Enter your username"
             variant="underlined"
+            color="pink-lighten-3"
             class="text-brown-darken-4"
           ></v-text-field>
 
@@ -107,60 +107,57 @@ export default {
             :rules="[rules.required, rules.email]"
             label="Email"
             variant="underlined"
+            color="pink-lighten-3"
             class="text-brown-darken-4"
           ></v-text-field>
 
           <v-text-field
             v-model="password"
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :append-inner-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, rules.noSpace, passwordRules]"
             :type="show1 ? 'text' : 'password'"
             hint="At least 8 characters"
             label="Password"
+            color="pink-lighten-3"
             variant="underlined"
             class="text-brown-darken-4"
-            @click:append="show1 = !show1"
+            @click:append-inner="show1 = !show1"
           ></v-text-field>
 
           <v-text-field
             v-model="passwordtest"
-            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+            :append-inner-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, confirmPassword]"
-            :type="show2 ? 'text' : 'password'"
+            :type="show1 ? 'text' : 'password'"
             label="Confirm Password"
             variant="underlined"
+            color="pink-lighten-3"
             class="text-brown-darken-4"
-            @click:append="show2 = !show2"
+            @click:append-inner="show1 = !show1"
           ></v-text-field>
         </v-form>
-        <v-checkbox
-          v-model="terms"
-          color="teal-lighten-3"
-          label="I agree to site terms and conditions"
-          class="text-brown-darken-4"
-        ></v-checkbox>
       </v-container>
 
-      <v-divider></v-divider>
+      <v-divider class="mx-6 my-2"/>
 
       <v-card-actions class="py-4 px-16">
         <v-btn
-          :disabled="!terms || !form"
+          :disabled="!form"
           block
           color="teal-lighten-3"
           size="large"
           type="submit"
           variant="elevated"
-          class="rounded-xl font-weight-bold text-white"
+          class="rounded-xl font-weight-bold text-white text-h6"
           elevation="4"
-          height="50px"
+          height="55px"
           @click="handleSubmit"
         >
-          Sign Up
+          SIGN UP
         </v-btn>
       </v-card-actions>
 
-      <v-divider></v-divider>
+      <v-divider class="mx-6 my-2"/>
 
       <v-card-actions
         class="text-body-1 d-flex flex-column align-center justify-space-around px-16 mx-4 pt-4"

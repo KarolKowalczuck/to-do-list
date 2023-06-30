@@ -49,6 +49,7 @@ export default {
         :rules="[rules.required]"
         label="List Title"
         variant="underlined"
+        color="pink-lighten-2"
         class="titulo text-brown-darken-4 mx-8 mt-4"
         width="90%"
       ></v-text-field>
