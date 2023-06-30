@@ -81,54 +81,116 @@ export default {
 </script>
 
 <template>
-  <v-container>
-    <v-text-field
-      v-model="listTitle"
-      @keydown.enter="updateTitle"
-      variant="solo"
-    ></v-text-field>
-  </v-container>
+  <v-sheet
+    class="d-flex flex-column justify-center align-center bg-brown-lighten-5"
+    height="100vh"
+    width="100vw"
+  >
+    <div>
+      <v-card
+        class="my-4"
+        height="7vh"
+        width="70vw"
+        rounded="xl"
+        elevation="14"
+      >
+        <v-text-field
+          class="bg-grey-lighten-4 py-3 pl-6 pr-12 text-brown-darken-2"
+          label="List Title"
+          v-model="listTitle"
+          color="pink-lighten-2"
+          variant="plain"
+          append-icon="mdi-check-circle-outline text-brown-darken-5 pb-4"
+          @click:append="updateTitle"
+        ></v-text-field>
+      </v-card>
 
-  <v-container>
-    <v-text-field
-      v-model="title"
-      label="Criar tarefa"
-      variant="solo"
-      @keydown.enter="createTask"
-    >
-      <template v-slot:append-inner>
-        <v-btn icon="mdi-plus-circle" variant="text" @click="createTask">
-        </v-btn>
-      </template>
-    </v-text-field>
+      <v-card
+        class="my-4 text-brown-darken-2 bg-grey-lighten-4"
+        width="70vw"
+        rounded="xl"
+        elevation="14"
+      >
+        <v-text-field
+          class="text-brown-darken-2 bg-transparent pt-6 px-6"
+          v-model="title"
+          rounded="xl"
+          label="New Item"
+          color="pink-lighten-3"
+          variant="outlined"
+          append-inner-icon="mdi-plus-circle mr-4"
+          @click:append-inner="createTask"
+        >
+        </v-text-field>
+        <v-divider class="mb-4 mx-8"/>
 
-    <v-card v-if="items.length > 0">
-      <template v-for="(item, i) in items" :key="`${i}-${item.text}`">
-        <v-divider v-if="i !== 0" :key="`${i}-divider`"></v-divider>
-        <v-list-item>
-          <v-list-item-title>
-            <v-text-field
-              v-model="item.title"
-              variant="solo"
-              @keydown.enter="updatedTask(item.id, item.title)"
+        <v-card
+          class="overflow-auto mx-6 bg-transparent"
+          elevation="0"
+          height="60vh"
+          v-if="items.length > 0"
+        >
+          <template v-for="(item, i) in items" :key="`${i}-${item.text}`">
+            <v-list-item
+              class="mb-5 mt-1 bg-grey-lighten-4 mx-1"
+              elevation="4"
+              rounded="xl"
+              height="6vh"
             >
-            </v-text-field>
-          </v-list-item-title>
-          <v-btn @click="updatedTask(item.id, item.title)">
-            <v-icon color="green"> mdi-check </v-icon>
+              <v-list-item-title class="d-flex align-center item mx-3">
+                <v-text-field
+                  v-model="item.title"
+                  variant="plain"
+                  prepend-icon="mdi-coffee-outline text-pink-lighten-3"
+                  color="brown-darken-1"
+                  append-inner-icon="mdi-check text-teal-darken-1"
+                  append-icon="mdi-close text-red-darken-3"
+                  @click:append-inner="updatedTask(item.id, item.title)"
+                  @click:append="deleteTask(item.id)"
+                >
+                </v-text-field>
+              </v-list-item-title>
+            </v-list-item>
+          </template>
+        </v-card>
+        <v-divider class="mt-6 mx-8" />
+        <div class="d-flex justify-center my-2">
+          <v-btn
+          color="grey-lighten-4"
+            class="my-4"
+            width="15vw"
+            height="5vh"
+            rounded="xl"
+            elevation="8"
+          >
+            <router-link
+              class="text-decoration-none text-teal-darken-1 d-flex justify-center align-center botao"
+              @click="updateTitle"
+              :to="`/list-detail/${listId}`"
+              >Salvar
+            </router-link>
           </v-btn>
-          <v-btn @click="deleteTask(item.id)">
-            <v-icon color="red"> mdi-close </v-icon>
-          </v-btn>
-        </v-list-item>
-      </template>
-    </v-card>
-    <br />
-
-    <v-btn>
-      <router-link @click="updateTitle" :to="`/list-detail/${listId}`"
-        >Salvar
-      </router-link>
-    </v-btn>
-  </v-container>
+        </div>
+      </v-card>
+    </div>
+  </v-sheet>
 </template>
+
+<style scoped>
+.item {
+  height: 4vh;
+}
+.botao {
+  height: 5vh;
+  width: 15vw;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  box-shadow: inset 0 0 2px #f8bbd0;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #f8bbd0;
+  border-radius: 5px;
+}
+</style>

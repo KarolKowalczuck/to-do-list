@@ -40,14 +40,10 @@ export default {
         const { access_token } = data;
         setupPrivateApi(access_token);
         localStorage.setItem("access_token", access_token);
-
-        alert("deu boa!");
-        console.log(payload);
-        console.log(data);
         this.$router.push("/dashboard");
 
       } catch (err) {
-        alert("Server error");
+        console.log(err);
       }
     },
   },
@@ -60,13 +56,13 @@ export default {
     rounded
   >
     <v-card
-      class="d-md-xxl-mx-auto px-6 py-8 bg-grey-lighten-5 mx-4"
+      class="d-md-xxl-mx-auto px-12 py-8 bg-grey-lighten-5 mx-4"
       height="450"
       width="550"
       rounded="xl"
       elevation="16"
     >
-      <p class="text-brown-lighten-1 text-h5 font-weight-medium">Log In</p>
+      <p class="text-brown-lighten-1 text-h4 font-weight-medium">Log In</p>
       <br />
       <v-form v-model="form" @submit.prevent="onSubmit">
         <v-text-field
@@ -75,6 +71,7 @@ export default {
           :rules="[rules.required, rules.email]"
           class="mb-2 text-brown-darken-2"
           clearable
+          color="pink-lighten-3"
           label="Email"
           append-icon="mdi-account-outline"
           variant="outlined"
@@ -88,6 +85,8 @@ export default {
           :type="show1 ? 'text' : 'password'"
           name="input-10-1"
           label="Password"
+          clearable
+          color="pink-lighten-3"
           placeholder="Enter your password"
           class="input-group--focused text-brown-darken-2"
           variant="outlined"

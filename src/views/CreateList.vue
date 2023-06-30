@@ -7,6 +7,9 @@ export default {
     return {
       title: "",
       items: [],
+      rules: {
+        required: (value) => !!value || "Required.",
+      },
     };
   },
   methods: {
@@ -17,7 +20,7 @@ export default {
         };
         const { data } = await this.create(title);
         // this.toDoList.push(data);
-       this.$router.push("/dashboard")
+        this.$router.push("/dashboard");
       } catch (err) {
         console.log(err);
       } finally {
@@ -29,25 +32,49 @@ export default {
 </script>
 
 <template>
-<v-text-field
-            v-model="title"
-            label="Title"
-            placeholder="Enter your ToDo title"
-            variant="underlined"
-            class="text-brown-darken-4"
-          ></v-text-field>
-
+  <v-sheet
+    class="d-flex align-center justify-center overflow-hidden bg-brown-lighten-5"
+    rounded
+    height="100vh"
+  >
+    <v-card
+      class="bg-grey-lighten-5 text-brown-darken-1 ma-4"
+      rounded="xl"
+      elevation="16"
+      width="60vw"
+      height="20vh"
+    >
+      <v-text-field
+        v-model="title"
+        :rules="[rules.required]"
+        label="List Title"
+        variant="underlined"
+        color="pink-lighten-2"
+        class="titulo text-brown-darken-4 mx-8 mt-4"
+        width="90%"
+      ></v-text-field>
+        <div
+        class="d-flex justify-end mt-8 mr-8">
           <v-btn
-          block
-          color="teal-lighten-3"
+          :disabled="!title"
+          class="rounded-xl"
+          color="teal-lighten-2"
           size="large"
-          type="submit"
           variant="elevated"
-          class="rounded-xl font-weight-bold text-white"
           elevation="4"
           height="50px"
+          width="200px"
           @click="CreatList"
-        >
-          Sign Up
+          >
+          Save
         </v-btn>
+      </div>
+    </v-card>
+  </v-sheet>
 </template>
+
+<style scoped>
+.titulo {
+  height: 90px;
+}
+</style>
