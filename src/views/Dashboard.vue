@@ -36,40 +36,45 @@ export default {
 };
 </script>
 <template>
-   <Loading v-if="loading"></Loading>
+  <Loading v-if="loading"></Loading>
   <v-sheet
     class="d-flex align-center justify-center overflow-hidden bg-brown-lighten-5"
     rounded
     height="100vh"
   >
     <v-card
-      class="d-md-xxl-mx-auto px-6 py-6 bg-grey-lighten-5"
-      height="80vh"
+      class="d-md-xxl-mx-auto px-6 py-4 bg-grey-lighten-5"
+      height="90vh"
       width="70vw"
       rounded="xl"
       elevation="16"
     >
-      <p class="text-h5 font-weight-medium text-brown-darken-1 ml-6 mb-4">
+      <p class="text-h5 font-weight-medium text-brown-darken-1 mb-4 d-flex align-end">
+        <img src="../components/images/coffee.png" height="55" class="pr-2"/>
         Your Lists:
       </p>
-      <v-divider/>
-      <v-card 
-      class="bg-transparent overflow-auto mt-4" 
-      elevation="0"
-      height="78%">
+      <v-divider />
+      <v-card
+        class="bg-transparent overflow-auto mt-4"
+        elevation="0"
+        height="78%"
+      >
         <div
           v-for="list in toDoLists"
           :key="list.id"
-          class="titulos mx-auto ma-5"
+          height="55"
+          class="mx-auto ma-5 d-flex flex-row align-center"
           width="90%"
-        >
-          <v-hover v-slot="{ isHovering, props }" open-delay="200">
+          >
+          <img src="../components/images/cafe.png" height="35"/>
+          <v-hover 
+          v-slot="{ isHovering, props }" open-delay="200">
             <v-card
               :elevation="isHovering ? 8 : 4"
               :class="{ 'on-hover': isHovering }"
-              class="mx-auto bg-brown-lighten-5"
+              class="bg-brown-lighten-5 ml-2"
               height="100%"
-              max-width="95%"
+              width="90%"
               rounded="lg"
               v-bind="props"
             >
@@ -77,46 +82,45 @@ export default {
                 class="text-decoration-none text-pink-lighten-3"
                 :to="`/list-detail/${list.id}`"
               >
-                <v-card-title> {{ list.title }}</v-card-title>
+                <v-card-title>
+                  {{ list.title }}</v-card-title>
               </router-link>
             </v-card>
           </v-hover>
         </div>
       </v-card>
-      <br/>
+      <br />
       <v-divider />
-      <br/>
-      <div
-      class="d-flex justify-end">
+      <br />
+      <div class="d-flex justify-end">
         <v-btn
-        class="rounded-xl"
-        color="teal-lighten-3"
-        size="large"
-        variant="elevated"
-        elevation="4"
-        height="50px"
-        width="200px"
+          class="rounded-xl"
+          color="teal-lighten-3"
+          size="large"
+          variant="elevated"
+          elevation="4"
+          height="50px"
+          width="200px"
         >
-        <router-link 
-        class="text-decoration-none text-white font-weight-bold"
-        to="/create-list">criar</router-link>
-      </v-btn>
-    </div>
+          <router-link
+            class="text-decoration-none text-white font-weight-bold"
+            to="/create-list"
+            >criar</router-link
+          >
+        </v-btn>
+      </div>
     </v-card>
   </v-sheet>
 </template>
 
 <style scoped>
-.titulos {
-  height: 55px;
-}
 ::-webkit-scrollbar {
   width: 10px;
-  box-shadow: inset 0 0 2px #F8BBD0;
+  box-shadow: inset 0 0 2px #f8bbd0;
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #F8BBD0;
+  background: #f8bbd0;
   border-radius: 5px;
 }
 </style>

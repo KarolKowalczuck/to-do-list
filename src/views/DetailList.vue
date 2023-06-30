@@ -61,7 +61,7 @@ export default {
 </script>
 
 <template>
-   <Loading v-if="loading"></Loading>
+  <Loading v-if="loading"></Loading>
   <v-sheet
     class="d-flex flex-column align-center justify-center overflow-auto bg-brown-lighten-5"
     rounded
@@ -75,7 +75,10 @@ export default {
       height="80vh"
     >
       <div>
-        <h1 class="font-weight-medium text-brown-darken-1 ml-12 mt-4">
+        <h1
+          class="d-flex align-end font-weight-medium text-brown-darken-1 ml-12 mt-4"
+        >
+          <img src="../components/images/coffee.png" height="55" class="pr-2" />
           {{ listTitle }}
         </h1>
       </div>
@@ -87,37 +90,44 @@ export default {
           elevation="0"
           v-if="items.length > 0"
         >
-          <template v-for="(item, i) in items" :key="`${i}-${item.text}`">
+          <template 
+          v-for="(item, i) in items" :key="`${i}-${item.text}`">
+          <div
+          class="d-flex flex-row align-center justify-center">
+
+            <img src="../components/images/cafe.png" height="30" class="mr-3" />
             <!-- <v-divider v-if="i !== 0" :key="`${i}-divider`"></v-divider> -->
             <v-list-item
-              class="ma-3 my-6 text-pink-lighten-"
-              height="6vh"
-              elevation="3"
-              rounded="xl"
+            class="my-6 text-pink-lighten-"
+            height="6vh"
+            elevation="3"
+            rounded="xl"
+            width="90%"
             >
-              <template v-slot:prepend>
-                <v-checkbox-btn
-                  @change="updatedTask(item)"
-                  v-model="item.done"
-                  color="teal-lighten-2"
-                ></v-checkbox-btn>
-              </template>
-              <v-list-item-title
-                :class="
+            <template v-slot:prepend>
+              <v-checkbox-btn
+              @change="updatedTask(item)"
+              v-model="item.done"
+              color="teal-lighten-2"
+              ></v-checkbox-btn>
+            </template>
+            <v-list-item-title
+            :class="
                   item.done
-                    ? 'text-grey text-decoration-line-through'
-                    : 'text-brown-darken-1'
-                "
+                  ? 'text-grey text-decoration-line-through'
+                  : 'text-brown-darken-1'
+                  "
               >
-                {{ item.title }}
-              </v-list-item-title>
-              <template v-slot:append>
-                <v-icon v-if="item.done" color="teal-lighten-2"
-                  >mdi-check</v-icon
-                >
-              </template>
-            </v-list-item>
-          </template>
+              {{ item.title }}
+            </v-list-item-title>
+            <template v-slot:append>
+              <v-icon v-if="item.done" color="teal-lighten-2"
+              >mdi-check</v-icon
+              >
+            </template>
+          </v-list-item>
+        </div>
+        </template>
         </v-card>
         <v-divider class="mt-4 mx-8" />
         <div class="d-flex justify-space-between align-center">
@@ -132,10 +142,10 @@ export default {
               width="150px"
             >
               <router-link
-                class="text-decoration-none text-brown-darken-1"
+                class="text-decoration-none text-teal-lighten-1"
                 :to="`/edit-list/${listId}`"
               >
-                Edit List
+                Edit Tasks
               </router-link>
             </v-btn>
             <v-btn
