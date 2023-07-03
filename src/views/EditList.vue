@@ -104,20 +104,20 @@ export default {
 <template>
   <Loading v-if="loading"></Loading>
   <v-sheet
-    class="d-flex flex-column justify-center align-center bg-brown-lighten-5"
+    class="sheet d-flex flex-column justify-center align-center bg-brown-lighten-5"
     height="100vh"
     width="100vw"
   >
-    <div>
+    <div class="card">
       <v-card
-        class="my-4"
-        height="7vh"
-        width="70vw"
+        class="title my-4"
+        height="70px"
+        width="80vw"
         rounded="xl"
         elevation="14"
       >
         <v-text-field
-          class="bg-grey-lighten-4 py-3 pl-6 pr-12 text-brown-darken-2"
+          class="titleText bg-grey-lighten-4 py-3 pl-6 pr-12 text-brown-darken-2"
           label="List Title"
           v-model="listTitle"
           color="pink-lighten-2"
@@ -128,13 +128,13 @@ export default {
       </v-card>
 
       <v-card
-        class="my-4 text-brown-darken-2 bg-grey-lighten-4"
-        width="70vw"
+        class="content my-4 text-brown-darken-2 bg-grey-lighten-4"
+        width="80vw"
         rounded="xl"
         elevation="14"
       >
         <v-text-field
-          class="text-brown-darken-2 bg-transparent pt-6 px-6"
+          class="itemtitle text-brown-darken-2 bg-transparent pt-6 px-6"
           v-model="title"
           rounded="xl"
           label="New Item"
@@ -147,7 +147,7 @@ export default {
         <v-divider class="mb-4 mx-8" />
 
         <v-card
-          class="overflow-auto mx-6 bg-transparent"
+          class="carditem overflow-auto mx-6 bg-transparent"
           elevation="0"
           height="60vh"
           v-if="items.length > 0"
@@ -183,14 +183,14 @@ export default {
         <div class="d-flex justify-center my-2">
           <v-btn
             color="grey-lighten-4"
-            class="my-4"
-            width="15vw"
-            height="5vh"
+            class="bttn my-4"
+            width="90px"
+            height="5Opx"
             rounded="xl"
             elevation="8"
           >
             <router-link
-              class="text-decoration-none text-teal-darken-1 d-flex justify-center align-center botao"
+              class="text-decoration-none text-teal-darken-1 d-flex justify-center align-center router"
               @click="updateTitle"
               :to="`/list-detail/${listId}`"
               >Salvar
@@ -206,7 +206,7 @@ export default {
 .item {
   height: 4vh;
 }
-.botao {
+.router {
   height: 5vh;
   width: 15vw;
 }
@@ -218,5 +218,39 @@ export default {
 ::-webkit-scrollbar-thumb {
   background: #f8bbd0;
   border-radius: 5px;
+}
+@media (max-width: 500px) {
+  .sheet {
+    justify-content: start !important;
+  }
+  .card {
+    height: 580px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .title {
+    max-height: 60px;
+    margin-top: 0 !important;
+  }
+  .titleText {
+    padding-right: 15px !important;
+  }
+  .content {
+    max-height: 90%;
+  }
+  .itemtitle {
+    width: 80vw;
+  }
+  .carditem {
+    overflow: auto;
+    max-height: 300px;
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+  }
+  .item {
+    margin-left: 2px !important;
+    margin-right: 1px !important;
+  }
+
 }
 </style>
