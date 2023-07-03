@@ -182,15 +182,15 @@ export default {
         <v-divider class="mt-6 mx-8" />
         <div class="d-flex justify-center my-2">
           <v-btn
-            color="grey-lighten-4"
+            color="teal-lighten-2"
             class="bttn my-4"
-            width="90px"
-            height="5Opx"
+            width="100px"
+            height="50px"
             rounded="xl"
             elevation="8"
           >
             <router-link
-              class="text-decoration-none text-teal-darken-1 d-flex justify-center align-center router"
+              class="text-decoration-none text-white d-flex justify-center align-center router"
               @click="updateTitle"
               :to="`/list-detail/${listId}`"
               >Salvar
