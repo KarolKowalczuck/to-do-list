@@ -5,7 +5,7 @@
     class="d-flex align-center justify-center h-100 overflow-hidden bg-grey-lighten-5"
   >
     <v-container class="container d-flex flex-column align-center justify-center text-center fill-height">
-      <img src="../components/images/coffecroqui.png" class="teste" />
+      <img src="../components/images/coffecroqui.png" class="image" />
       <h1 class="text-brown-lighten-1">To do list</h1>
 
       <v-row class="links d-flex align-center justify-center">
@@ -51,7 +51,7 @@ h1 {
   height: 100vh;
   width: 100vw;
 }
-.teste {
+.image {
   width: 100%;
   height: auto;
   margin-bottom: 50px;
