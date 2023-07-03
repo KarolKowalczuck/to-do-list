@@ -38,15 +38,15 @@ export default {
     height="100vh"
   >
     <v-card
-      class="bg-grey-lighten-5 text-brown-darken-1 ma-4"
+      class="card bg-grey-lighten-5 text-brown-darken-1 ma-4"
       rounded="xl"
       elevation="16"
-      width="60vw"
-      height="30vh"
+      width="650px"
+      height="300px"
     >
     <v-card-title
     class="text-h5 ma-5">
-      Choose a name for your list
+      Create new list
     </v-card-title>
       <v-text-field
         v-model="title"
@@ -54,12 +54,13 @@ export default {
         label="List Title"
         variant="underlined"
         color="pink-lighten-2"
-        class="titulo text-brown-darken-4 mx-8 mt-4"
+        class="text-brown-darken-4 mx-8 mt-4"
+        height="90"
         width="90%"
       ></v-text-field>
-      <div class="d-flex justify-space-between mt-8 mx-8">
+      <div class="button d-flex justify-space-between mt-8 mx-10">
         <v-btn
-          class="rounded-xl"
+          class="cancel rounded-xl"
           size="large"
           variant="elevated"
           elevation="4"
@@ -94,5 +95,21 @@ export default {
 <style scoped>
 .titulo {
   height: 90px;
+}
+@media (max-width: 500px) {
+  .card {
+    max-width: 90vw;
+    max-height: 80vh;
+  }
+  .button{
+    flex-direction: column-reverse;
+    height: 80px;
+    align-items: center;
+    margin-top: 2px;
+    margin-bottom: 6px;
+  }
+  .cancel {
+    margin-top: 10px;
+  }
 }
 </style>

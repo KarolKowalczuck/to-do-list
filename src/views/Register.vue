@@ -148,7 +148,7 @@ export default {
           size="large"
           type="submit"
           variant="elevated"
-          class="rounded-xl font-weight-bold text-white text-h6"
+          class="rounded-xl font-weight-bold text-white text-h7"
           elevation="4"
           height="55px"
           @click="handleSubmit"
@@ -160,7 +160,7 @@ export default {
       <v-divider class="mx-6 my-2"/>
 
       <v-card-actions
-        class="text-body-1 d-flex flex-column align-center justify-space-around px-16 mx-4 pt-4"
+        class="text-body-1 d-flex flex-column align-center justify-center"
       >
         <p class="text-brown-darken-1">Alredy have an account?</p>
         <router-link
@@ -186,6 +186,8 @@ export default {
     margin-right: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
+    max-height: 550px;
+    overflow: auto;
   }
 }
 </style>
