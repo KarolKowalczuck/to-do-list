@@ -48,17 +48,6 @@ export default {
         this.loading = false;
       }
     },
-    async deleteList() {
-      this.loading = true;
-      try {
-        await this.remove(this.listId);
-        this.$router.push("/dashboard");
-      } catch (err) {
-        console.log(err);
-      } finally {
-        this.loading = false;
-      }
-    },
     async deleteTask(itemId) {
       this.loading = true;
       try {
@@ -142,6 +131,7 @@ export default {
           variant="outlined"
           append-inner-icon="mdi-plus-circle mr-4"
           @click:append-inner="createTask"
+          @keydown.enter="createTask"
         >
         </v-text-field>
         <v-divider class="mb-4 mx-8" />
@@ -167,6 +157,7 @@ export default {
                   append-inner-icon="mdi-check text-teal-darken-1"
                   append-icon="mdi-close text-red-darken-3"
                   @click:append-inner="updatedTask(item.id, item.title)"
+                  @keydown.enter="updatedTask(item.id, item.title)"
                   @click:append="deleteTask(item.id)"
                 >
                   <img
