@@ -23,11 +23,17 @@ export default {
       try {
         const { data } = await this.list();
         this.toDoLists = data;
+
+        this.toDoLists.sort((a, b) => a.title.localeCompare(b.title));
       } catch (err) {
         console.log(err);
       } finally {
         this.loading = false;
       }
+    },
+    logOut() {
+      localStorage.removeItem("access_token");
+      this.$router.push("/");
     },
   },
   mounted() {
@@ -94,7 +100,7 @@ export default {
       <br />
       <div class="d-flex justify-end">
         <v-btn
-          class="rounded-xl"
+          class="rounded-xl mr-4"
           color="teal-lighten-3"
           size="large"
           variant="elevated"
@@ -107,6 +113,18 @@ export default {
             to="/create-list"
             >criar</router-link
           >
+        </v-btn>
+        <v-btn
+        class="rounded-xl text-decoration-none text-white font-weight-bold"
+          color="teal-lighten-3"
+          size="large"
+          variant="elevated"
+          elevation="4"
+          height="50px"
+          width="200px"
+          @click="logOut"
+        >
+          Log Out
         </v-btn>
       </div>
     </v-card>
